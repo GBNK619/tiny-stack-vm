@@ -5,14 +5,14 @@ let D=new Int32Array(256),C=new Int32Array(64),S=new Int32Array(256),o=new Uint8
 for(;;){
 if(t==1e6)return e(10);
 if(x<0||x>=n)return e(9);
-let u=p[x];
-if(!(u<8||u>15&&u<35&&u!=31||u>47&&u<53||u==64||u==65||u>79&&u<84))return e(5);
-let m=u==1?1:u==2?4:u>47&&u<52?2:0;
+let u=p[x],B=u>15&u<35&u!=31;
+if(!(u<8||B||u>47&u<53||u>63&u<66||u>79&u<84))return e(5);
+let m=u==1?1:u==2?4:u>47&u<52?2:0;
 if(x+m>=n)return e(9);
 t++;
-let z=x+1+m,a,b,r,P=u==7?3:u==5|u==6|u==65|u>15&u<35&u!=31&u!=23&u!=27?2:u==3|u==4|u==23|u==27|u==49|u==50|u==64|u==80|u==81|u==83?1:0;
+let z=x+1+m,a,b,r,P=u==7?3:u>4&u<7|u==65|B&u!=23&u!=27?2:u>2&u<5|u==23|u==27|u>48&u<51|u==64|u>79&u<84&u!=82?1:0;
 if(s<P)return e(2);
-if(s-P+(u==6|u==7?3:u==4|u==5?2:u==1|u==2|u==64|u==82|u>15&u<35&u!=31?1:0)>256)return e(3);
+if(s-P+(u>5&u<8?3:u>3&u<6?2:u==1|u==2|u==64|u==82|B?1:0)>256)return e(3);
 x=z;
 switch(u){
 case 0:return e(0);
@@ -30,7 +30,7 @@ case 51:if(c==64)return e(7);C[c++]=z;x=p[z-2]|p[z-1]<<8;break;
 case 52:if(!c)return e(8);x=C[--c];break;
 case 64:a=D[s-1];if(a<0||a>255)return e(6);D[s-1]=S[a];break;
 case 65:a=D[s-1];b=D[s-2];if(a<0||a>255)return e(6);s-=2;S[a]=b;break;
-case 80:{let w=String(D[s-1]);if(l+w.length>65536)return e(11);s--;for(let j=0;j<w.length;)o[l++]=w.charCodeAt(j++);break}
+case 80:{let w=""+D[--s];if(l+w.length>65536)return e(11);for(let j=0;j<w.length;)o[l++]=w.charCodeAt(j++);break}
 case 81:if(l>65535)return e(11);o[l++]=D[--s]&255;break;
 case 82:D[s++]=i<q.length?q[i++]:-1;break;
 case 83:return e(D[--s]&255);
